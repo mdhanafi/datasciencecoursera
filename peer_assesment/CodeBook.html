@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>[COURSERA] Peer Assessments /Getting and Cleaning Data Project - CodeBook</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>[COURSERA] Peer Assessments /Getting and Cleaning Data Project - CodeBook</h1>
+
+<p>Class by:  Jeff Leek</p>
+
+<p>Students: Hanafi</p>
+
+<p>Date: April 2014</p>
+
+<hr/>
+
+<h1>About project</h1>
+
+<p>Source: <a href="https://class.coursera.org/getdata-002/human_grading/view/courses/972080/assessments/3/submissions">https://class.coursera.org/getdata-002/human_grading/view/courses/972080/assessments/3/submissions</a></p>
+
+<p>Extracted from the source URL:</p>
+
+<p><em>The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis.</em></p>
+
+<hr/>
+
+<h1>Purpose</h1>
+
+<p>To describe the variables, the data, and any transformations or work that has been performed to clean up the data.</p>
+
+<hr/>
+
+<h1>Data</h1>
+
+<h2>Source data and associate data frame variables</h2>
+
+<p>Following are the source data and the respective used data frame:</p>
+
+<ol>
+<li><strong>Training data set</strong>
+
+<ul>
+<li>Read &gt; train_data = read.table(&ldquo;UCI HAR Dataset/train/X_train.txt&rdquo;)</li>
+<li>Example &gt; 2.8858451e-001 -2.0294171e-002 &hellip;</li>
+</ul></li>
+<li><strong>Test data set</strong> 
+
+<ul>
+<li>Read &gt; test_data = read.table(&ldquo;UCI HAR Dataset/test/X_test.txt&rdquo;) </li>
+<li>Example &gt; 2.8858451e-001 -2.0294171e-002 &hellip;</li>
+</ul></li>
+<li><strong>List of feature in the data set i.e. column description</strong>
+
+<ul>
+<li>Read &gt; dfeature = read.table(&ldquo;UCI HAR Dataset//features.txt&rdquo;)</li>
+<li>Example &gt; 7 tBodyAcc-mad()-X</li>
+<li>See also &gt; UCI HAR Dataset/features_info.txt</li>
+</ul></li>
+<li><strong>List of activity constant and description carried out by subject</strong>
+
+<ul>
+<li>Read &gt; activity_label = read.table(&ldquo;UCI HAR Dataset//activity_labels.txt&rdquo;)</li>
+<li>Example &gt; 2 WALKING_UPSTAIRS</li>
+</ul></li>
+<li>**Activity label carried out by each subject in training dataset based on code in List of activity</b> 
+
+<ul>
+<li>Read &gt; train_label = read.table(&ldquo;UCI HAR Dataset/train/y_train.txt&rdquo;)</li>
+</ul></li>
+<li>**Activity label carried out by each subject in test dataset based on code in List of activity</b>
+
+<ul>
+<li>Read &gt; test_label = read.table(&ldquo;UCI HAR Dataset/test/y_test.txt&rdquo;)</li>
+</ul></li>
+<li><strong>List of subject id in training dataset</strong>
+
+<ul>
+<li>Read &gt; train_subject = read.table(&ldquo;UCI HAR Dataset/train/subject_train.txt&rdquo;)</li>
+</ul></li>
+<li><strong>List of subject id in test dataset</strong>
+
+<ul>
+<li>Read  &gt; test_subject = read.table(&ldquo;UCI HAR Dataset/test/subject_test.txt&rdquo;)<br/></li>
+</ul></li>
+</ol>
+
+<h2>Data transformation works and cleanup</h2>
+
+<p>Following are the steps have been taken to find the needed &ldquo;tinydata&rdquo;</p>
+
+<ol>
+<li><strong>(Q1)</strong> Merges the training and the test sets to create one data set 
+
+<ul>
+<li>Read and performing row merge of <strong>train_data</strong> with <strong>test_data</strong> via <strong><em>data_set = rbind(train_data,test_data)</em></strong> </li>
+</ul></li>
+<li>Update column name for data set
+
+<ul>
+<li>Read <strong>dfeature</strong> data, i.e. column description of of data set.</li>
+<li>Update the column name for data set <strong><em>names (data_set) = dfeature$V2</em></strong></li>
+</ul></li>
+<li><strong>(Q2)</strong> Extracts only the measurements on the mean &#39;mean()&#39; and standard deviation &#39;std()&#39; for each measurement from data set into selected dataset <strong>dselect</strong> 
+
+<ul>
+<li>This is via <strong><em>dselect = data_set[,grep(&ldquo;{1}.-mean{1}.{1})|{1}.-std{1}.{1})&rdquo;,names(data_set))]</em></strong></li>
+</ul></li>
+<li><strong>(Q3), (Q4)</strong> Uses descriptive activity names to name the activities in the data set by adding new column for activity labelling
+
+<ul>
+<li>Read <strong>train_label</strong> via <strong><em>train_label$activity_label = activity_label[train_label$V1,2]</em></strong></li>
+<li>Read <strong>test_label</strong> via <strong><em>test_label$activity_label = activity_label[test_label$V1,2]</em></strong></li>
+<li>Then row combined them via <strong><em>label_bind = rbind(train_label,test_label)</em></strong></li>
+<li>Finally add this column into selected dataset via <strong><em>dselect = cbind(dselect,&ldquo;activity_label&rdquo;= label_bind$activity_label)</em></strong></li>
+</ul></li>
+<li>Assign subject id to the selected data set <strong>dselect</strong>
+
+<ul>
+<li>Read <strong>train_subject</strong> via  <strong><em>train_subject = read.table(&ldquo;UCI HAR Dataset/train/subject_train.txt&rdquo;)</em></strong></li>
+<li>Read <strong>test_subject</strong> via  <strong><em>test_subject = read.table(&ldquo;UCI HAR Dataset/test/subject_test.txt&rdquo;)</em></strong></li>
+<li>Then row combined them via <strong><em>label_subject = rbind(train_subject, test_subject)</em></strong></li>
+<li>Finally add this column into selected dataset via <strong><em>dselect = cbind(dselect,&ldquo;subject&rdquo;= label_subject$V1)</em></strong></li>
+</ul></li>
+<li><strong>(Q5)</strong>Finally generating <strong>tinydata</strong> that is an independent tidy data set with the average of each variable for each activity and each subject.
+
+<ul>
+<li>This is via simple agregate function, <strong><em>tinydata = aggregate(dselect[1:66], by=list(&ldquo;subject&rdquo;=dselect$subject,&ldquo;activity_label&rdquo;=dselect$activity_label), FUN=mean, na.rm=TRUE)</em></strong></li>
+<li>Usage of <strong><em>dselect[1:66]</em></strong> is due to that is the column consist of features list needed in <strong>(Q2)</strong>, <strong>mean()</strong> and <strong>std()</strong> </li>
+</ul></li>
+</ol>
+
+<h4>[End of document]</h4>
+
+</body>
+
+</html>
+
